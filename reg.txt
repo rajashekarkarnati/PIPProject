@@ -1,0 +1,92 @@
+    <style>
+        body{
+            background-color:black;
+        }
+    .card {
+        background:white;
+	width: 550px;
+	height: 650px;
+	
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;  	
+	margin: auto;
+    border-style : solid;
+}
+    .card h3{
+        text-align : center;
+    }
+    </style>
+
+    <!-- Custom styles for this template-->
+    @*<link href="~/External/css/sb-admin-2.min.css" rel="stylesheet">*@
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Student Registration</h3>
+                <hr/>
+                @using (Html.BeginForm("StudentRegister", "Login", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="studentname" class="control-label">Name</label>
+                        @Html.EditorFor(model => model.studentname, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Name", @id = "studentname" } })
+                        @Html.ValidationMessageFor(model => model.studentname, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="age" class="control-label">Age</label>
+                        @Html.EditorFor(model => model.age, new { htmlAttributes = new { @class = "form-control", @type = "number", @placeholder = "Age", @id = "age" } })
+                        @Html.ValidationMessageFor(model => model.age, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="mobileno" class="control-label">Mobile No</label>
+                        @Html.EditorFor(model => model.mobileno, new { htmlAttributes = new { @class = "form-control", @type = "number", @placeholder = "MobileNo", @id = "mobileno" } })
+                        @Html.ValidationMessageFor(model => model.mobileno, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-12 col-md-12">
+                        <label for="password" class="control-label">Password</label>
+                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", @type = "password", @placeholder = "password", @id = "password" } })
+                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="gender" class="control-label">Gender</label>
+                        <div>
+                            <label class="radio-inline"><input type="radio" name="gender" value="Male">Male</label>
+                            <label class="radio-inline"><input type="radio" name="gender" value="Female">Female</label>
+                            @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="email" class="control-label">Email</label>
+                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "email", @id = "email" } })
+                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="dob" class="control-label">dob</label>
+                        @Html.EditorFor(model => model.dob, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "email", @id = "dob" } })
+                        @Html.ValidationMessageFor(model => model.dob, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-12 col-md-12">
+                        <label for="address" class="control-label">Address</label>
+                        <textarea class="form-control" id="address" rows="3" col="10" name="address" required style="width:250px;"></textarea>
+                        @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary" id="btnRegister">
+                            Register Account
+                        </button>
+                    </div>
+                }
+                <div class="text-center">
+                    <a class="small" href="/Login/StudentLogin">Already have an account? Login!</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
