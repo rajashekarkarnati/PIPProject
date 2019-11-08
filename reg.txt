@@ -1,3 +1,22 @@
+@model StudentRepositorySystem.Models.StudentDetail
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>StudentRegister</title>
+    <!-- Custom fonts for this template-->
+    @*<link href="~/External/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">*@
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
     <style>
         body{
             background-color:black;
@@ -90,3 +109,514 @@
             </div>
         </div>
     </div>
+    @*<div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+             Nested Row within Card Body
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                        </div>
+                        @using (Html.BeginForm("StudentRegister", "Login", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    @Html.EditorFor(model => model.studentname, new { htmlAttributes = new { @class = "form-control form-control-user", @type = "text", @id = "studentname", @placeholder = "Student Name",@Maxlength="20" } })
+                                    @Html.ValidationMessageFor(model => model.studentname, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-2" }):
+                                <input type="radio" id="gender" name="gender" value="Male" required> Male
+                                <input type="radio" id="gender" name="gender" value="Female" required> Female
+                                @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @type = "password", @class = "form-control form-control-user", @id = "password", @required = "required", @placeholder = "Password" } })
+                                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    @Html.EditorFor(model => model.age, new { htmlAttributes = new { @type = "number", @class = "form-control form-control-user", @id = "age", @required = "required", @placeholder = "Age" } })
+                                    @Html.ValidationMessageFor(model => model.age, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-sm-6">
+                                    @Html.EditorFor(model => model.mobileno, new { htmlAttributes = new { @type = "number", @class = "form-control form-control-user", @id = "mobileno", @required = "required", @placeholder = "MobileNo" } })
+                                    @Html.ValidationMessageFor(model => model.mobileno, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    @Html.EditorFor(model => model.dob, new { htmlAttributes = new { @type = "date", @class = "form-control form-control-user", @id = "dob", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.dob, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-sm-6">
+                                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @type = "email", @class = "form-control form-control-user", @id = "mobileno", @required = "required", @placeholder = "Email" } })
+                                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Address</label> :
+                                @Html.TextAreaFor(model => model.address, new { htmlAttributes = new { @class = "form-control form-control-user", @id = "address", @required = "required", @placeholder = "Address" } })
+                                @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+                            </div>
+                            <button class="btn btn-primary btn-user btn-block" id="btnRegister">
+                                Register Account
+                            </button>
+                        }
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="/Login/StudentLogin">Already have an account? Login!</a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>*@
+
+    <!-- <script src="~/External/vendor/jquery/jquery.min.js"></script>-->
+    @*<script src="~/External/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <!-- <script src="~/External/vendor/jquery-easing/jquery.easing.min.js"></script>-->
+    <!-- Custom scripts for all pages-->
+    @*<script src="~/External/js/sb-admin-2.min.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script>
+        $(function () {
+
+            $('#mobileno').bind("keypress", function (e) {
+                if ($(this).val().length >= 10) {
+                    e.preventDefault();
+                }
+            })
+            $('#age').bind("keypress", function (e) {
+
+                var key = e.keyCode;
+                if ($(this).val().length >= 2) {
+                    e.preventDefault();
+                }
+                if (key == 46) {
+                e.preventDefault();
+            }
+            })
+
+            $('form').submit(function () {
+                if ($(this).valid()) {
+                    $.ajax({
+                        url: this.action,
+                        type: this.method,
+                        data: $(this).serialize(),
+                        success: function (result) {
+                            swal({
+                                html: true,
+                                title: 'Good Job!',
+                                text: 'Successfully Registered! <h2>Your StudentId is <strong>' + result.data + '</strong></h2>',
+                                type: 'success',
+                                confirmButtonText: 'Ok'
+                            },
+                                function (isConfirm) {
+                                    if (isConfirm) {
+                                        window.location.href = "/Login/StudentLogin";
+                                    }
+                                });
+
+                        },
+                        error: function () {
+                            swal({
+                                type: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                            });
+                        }
+
+                    });
+                }
+                return false;
+            });
+        });
+    </script>
+
+    @*<script>
+            $('#btnRegister').click(function (e) {
+                var formdata = getformdata();
+                $.ajax({
+                    url: "/Login/StudentRegister",
+                    type: "POST",
+                    data: JSON.stringify(formdata),
+                    dataType: "json",
+                    traditional: true,
+                    contentType: "application/json; charset=utf-8",
+                    success: function (params) {
+                        swal({
+                            title: 'Good Job!',
+                            text: 'Its Successfully Done!',
+                            type: 'success',
+                            confirmButtonText: 'Ok'
+                        },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    window.location.href = "/Login/StudentLogin";
+                                }
+                            });
+                    },
+                    error: function () {
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                        });
+                    }
+                });
+            });
+
+            function getformdata() {
+                var studentid = $("#studentid").val();
+                var studentname = $("#studentname").val();
+                var password = $("#password").val();
+                var gender = $("#gender").val();
+                var age = $("#age").val();
+                var dob = $("#dob").val();
+                var address = $("#address").val();
+                //var photo = $('#photo')[0].files[0];
+                var mobileno = $("#mobileno").val();
+                var formdata = {};
+                formdata.studentid = studentid;
+                formdata.studentname = studentname;
+                formdata.password = password;
+                formdata.gender = gender;
+                formdata.age = age;
+                formdata.dob = dob;
+                formdata.address = address;
+                formdata.mobileno = mobileno;
+                return formdata;
+            };
+        </script>*@
+    }
+</body>
+
+</html>
+@model StudentRepositorySystem.Models.StudentDetail
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>StudentRegister</title>
+    <!-- Custom fonts for this template-->
+    @*<link href="~/External/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">*@
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <style>
+        body{
+            background-color:black;
+        }
+    .card {
+        background:white;
+	width: 550px;
+	height: 650px;
+	
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;  	
+	margin: auto;
+    border-style : solid;
+}
+    .card h3{
+        text-align : center;
+    }
+    </style>
+
+    <!-- Custom styles for this template-->
+    @*<link href="~/External/css/sb-admin-2.min.css" rel="stylesheet">*@
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Student Registration</h3>
+                <hr/>
+                @using (Html.BeginForm("StudentRegister", "Login", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="studentname" class="control-label">Name</label>
+                        @Html.EditorFor(model => model.studentname, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Name", @id = "studentname" } })
+                        @Html.ValidationMessageFor(model => model.studentname, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="age" class="control-label">Age</label>
+                        @Html.EditorFor(model => model.age, new { htmlAttributes = new { @class = "form-control", @type = "number", @placeholder = "Age", @id = "age" } })
+                        @Html.ValidationMessageFor(model => model.age, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="mobileno" class="control-label">Mobile No</label>
+                        @Html.EditorFor(model => model.mobileno, new { htmlAttributes = new { @class = "form-control", @type = "number", @placeholder = "MobileNo", @id = "mobileno" } })
+                        @Html.ValidationMessageFor(model => model.mobileno, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-12 col-md-12">
+                        <label for="password" class="control-label">Password</label>
+                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", @type = "password", @placeholder = "password", @id = "password" } })
+                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="gender" class="control-label">Gender</label>
+                        <div>
+                            <label class="radio-inline"><input type="radio" name="gender" value="Male">Male</label>
+                            <label class="radio-inline"><input type="radio" name="gender" value="Female">Female</label>
+                            @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="email" class="control-label">Email</label>
+                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "email", @id = "email" } })
+                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4">
+                        <label for="dob" class="control-label">dob</label>
+                        @Html.EditorFor(model => model.dob, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "email", @id = "dob" } })
+                        @Html.ValidationMessageFor(model => model.dob, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-12 col-md-12">
+                        <label for="address" class="control-label">Address</label>
+                        <textarea class="form-control" id="address" rows="3" col="10" name="address" required style="width:250px;"></textarea>
+                        @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary" id="btnRegister">
+                            Register Account
+                        </button>
+                    </div>
+                }
+                <div class="text-center">
+                    <a class="small" href="/Login/StudentLogin">Already have an account? Login!</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @*<div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+             Nested Row within Card Body
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                        </div>
+                        @using (Html.BeginForm("StudentRegister", "Login", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    @Html.EditorFor(model => model.studentname, new { htmlAttributes = new { @class = "form-control form-control-user", @type = "text", @id = "studentname", @placeholder = "Student Name",@Maxlength="20" } })
+                                    @Html.ValidationMessageFor(model => model.studentname, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-2" }):
+                                <input type="radio" id="gender" name="gender" value="Male" required> Male
+                                <input type="radio" id="gender" name="gender" value="Female" required> Female
+                                @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @type = "password", @class = "form-control form-control-user", @id = "password", @required = "required", @placeholder = "Password" } })
+                                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    @Html.EditorFor(model => model.age, new { htmlAttributes = new { @type = "number", @class = "form-control form-control-user", @id = "age", @required = "required", @placeholder = "Age" } })
+                                    @Html.ValidationMessageFor(model => model.age, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-sm-6">
+                                    @Html.EditorFor(model => model.mobileno, new { htmlAttributes = new { @type = "number", @class = "form-control form-control-user", @id = "mobileno", @required = "required", @placeholder = "MobileNo" } })
+                                    @Html.ValidationMessageFor(model => model.mobileno, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    @Html.EditorFor(model => model.dob, new { htmlAttributes = new { @type = "date", @class = "form-control form-control-user", @id = "dob", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.dob, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-sm-6">
+                                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @type = "email", @class = "form-control form-control-user", @id = "mobileno", @required = "required", @placeholder = "Email" } })
+                                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Address</label> :
+                                @Html.TextAreaFor(model => model.address, new { htmlAttributes = new { @class = "form-control form-control-user", @id = "address", @required = "required", @placeholder = "Address" } })
+                                @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+                            </div>
+                            <button class="btn btn-primary btn-user btn-block" id="btnRegister">
+                                Register Account
+                            </button>
+                        }
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="/Login/StudentLogin">Already have an account? Login!</a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>*@
+
+    <!-- <script src="~/External/vendor/jquery/jquery.min.js"></script>-->
+    @*<script src="~/External/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <!-- <script src="~/External/vendor/jquery-easing/jquery.easing.min.js"></script>-->
+    <!-- Custom scripts for all pages-->
+    @*<script src="~/External/js/sb-admin-2.min.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script>
+        $(function () {
+
+            $('#mobileno').bind("keypress", function (e) {
+                if ($(this).val().length >= 10) {
+                    e.preventDefault();
+                }
+            })
+            $('#age').bind("keypress", function (e) {
+
+                var key = e.keyCode;
+                if ($(this).val().length >= 2) {
+                    e.preventDefault();
+                }
+                if (key == 46) {
+                e.preventDefault();
+            }
+            })
+
+            $('form').submit(function () {
+                if ($(this).valid()) {
+                    $.ajax({
+                        url: this.action,
+                        type: this.method,
+                        data: $(this).serialize(),
+                        success: function (result) {
+                            swal({
+                                html: true,
+                                title: 'Good Job!',
+                                text: 'Successfully Registered! <h2>Your StudentId is <strong>' + result.data + '</strong></h2>',
+                                type: 'success',
+                                confirmButtonText: 'Ok'
+                            },
+                                function (isConfirm) {
+                                    if (isConfirm) {
+                                        window.location.href = "/Login/StudentLogin";
+                                    }
+                                });
+
+                        },
+                        error: function () {
+                            swal({
+                                type: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                            });
+                        }
+
+                    });
+                }
+                return false;
+            });
+        });
+    </script>
+
+    @*<script>
+            $('#btnRegister').click(function (e) {
+                var formdata = getformdata();
+                $.ajax({
+                    url: "/Login/StudentRegister",
+                    type: "POST",
+                    data: JSON.stringify(formdata),
+                    dataType: "json",
+                    traditional: true,
+                    contentType: "application/json; charset=utf-8",
+                    success: function (params) {
+                        swal({
+                            title: 'Good Job!',
+                            text: 'Its Successfully Done!',
+                            type: 'success',
+                            confirmButtonText: 'Ok'
+                        },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    window.location.href = "/Login/StudentLogin";
+                                }
+                            });
+                    },
+                    error: function () {
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                        });
+                    }
+                });
+            });
+
+            function getformdata() {
+                var studentid = $("#studentid").val();
+                var studentname = $("#studentname").val();
+                var password = $("#password").val();
+                var gender = $("#gender").val();
+                var age = $("#age").val();
+                var dob = $("#dob").val();
+                var address = $("#address").val();
+                //var photo = $('#photo')[0].files[0];
+                var mobileno = $("#mobileno").val();
+                var formdata = {};
+                formdata.studentid = studentid;
+                formdata.studentname = studentname;
+                formdata.password = password;
+                formdata.gender = gender;
+                formdata.age = age;
+                formdata.dob = dob;
+                formdata.address = address;
+                formdata.mobileno = mobileno;
+                return formdata;
+            };
+        </script>*@
+    }
+</body>
+
+</html>
