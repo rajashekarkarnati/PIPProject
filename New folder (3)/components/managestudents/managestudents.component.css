@@ -1,0 +1,11 @@
+table {
+    width: 100%;
+  }
+
+.hide {
+      display: none;
+  }
+
+input {
+    justify-content: center;
+}

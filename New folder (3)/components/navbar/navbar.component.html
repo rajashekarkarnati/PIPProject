@@ -1,0 +1,88 @@
+<!-- <mat-toolbar color="primary">
+    <mat-toolbar-row>
+         <button mat-icon-button>
+            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+        </button> -->
+        <h1>SimpleCRM</h1>
+          <span class="menu-spacer"></span>
+          <div>
+                <a mat-button [routerLink]="'/accounts'"> Add New Job </a>
+                <a mat-button [routerLink]="'/create-account'"> Manage Students </a>
+                <a mat-button [routerLink]="'/contacts'"> Manage Users </a>
+                <a mat-button [routerLink]="'/create-contact'"> Applied Jobs </a>
+            </div>
+          <span class="fill"></span>
+          <button mat-button [matMenuTriggerFor]="belowMenu">Below</button>
+           <mat-menu #belowMenu="matMenu" yPosition="below">
+                <a mat-button [routerLink]="'/create-activity'"> logout </a>
+           </mat-menu>
+        <!-- <div *ngIf = "isStudent()">
+        <h1>SimpleCRM</h1>
+          <span class="menu-spacer"></span>
+          <div>
+                <a mat-button [routerLink]="'/accounts'"> Edit Details </a>
+                <a mat-button [routerLink]="'/create-contact'"> Applied Jobs </a>
+              </div>
+          <span class="fill"></span>
+          <button mat-button [matMenuTriggerFor]="belowMenu">Below</button>
+           <mat-menu #belowMenu="matMenu" yPosition="below">
+                <a mat-button [routerLink]="'/create-activity'"> logout </a>
+           </mat-menu>
+          <span class="menu-spacer"></span>
+          <div>
+            <a mat-button [routerLink]="'/accounts'"> Apply Jobs </a>
+          </div>
+          <span class="fill"></span>
+          <button mat-button [matMenuTriggerFor]="belowMenu">Go To Home</button>\\
+        </mat-toolbar-row> 
+</mat-toolbar> -->
+
+
+<nav class="navbar navbar-light">
+        <div class="container">
+          <a class="navbar-brand" routerLink="/">SRS</a>
+      
+      
+          <!-- Show this for logged in users -->
+          <ul *appShowAuthed="true"
+            class="nav navbar-nav pull-xs-right">
+      
+            <li class="nav-item">
+              <a class="nav-link"
+                routerLink="/"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">
+                Home
+              </a>
+            </li>
+      
+            <li class="nav-item">
+              <a class="nav-link"
+                routerLink="/editor"
+                routerLinkActive="active">
+                <i class="ion-compose"></i>&nbsp;New Article
+              </a>
+            </li>
+      
+            <li class="nav-item">
+              <a class="nav-link"
+                routerLink="/settings"
+                routerLinkActive="active">
+                <i class="ion-gear-a"></i>&nbsp;Settings
+              </a>
+            </li>
+      
+            <li class="nav-item">
+              <a class="nav-link"
+                [routerLink]="['/profile', currentUser.username]"
+                routerLinkActive="active">
+                <img [src]="currentUser.image" *ngIf="currentUser.image" class="user-pic" />
+                {{ currentUser.username }}
+              </a>
+            </li>
+      
+          </ul>
+      
+        </div>
+      </nav>
+      
